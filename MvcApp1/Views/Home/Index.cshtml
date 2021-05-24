@@ -8,23 +8,33 @@
 </div>
 
 
-<div class="row">
-    <div class="col-12">
-        @if (Context.User.Identity.IsAuthenticated)
-        {
+@if (Context.User.Identity.IsAuthenticated)
+{
+    var idToken = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.GetTokenAsync(Context, "id_token");
+    var accessToken = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.GetTokenAsync(Context, "access_token"); 
+    <div class="row">
+        <div class="col-12">
             <h2>Logged in @Context.User.Identity.Name</h2>
 
-            @foreach (var claim in Context.User.Claims)
-            {
-                <dl>
+            <dl>
+                <dt>Id Token</dt>
+                <dd>@idToken</dd>
+                <dt>Access Token</dt>
+                <dd>@accessToken</dd>
+                @foreach (var claim in Context.User.Claims)
+                {
                     <dt>@claim.Type : @claim.Properties</dt>
                     <dd>@claim.Value</dd>
-                </dl>
-            }
-        }
-        else
-        {
-            <h2>Not Logged in</h2>
-        }
+                }
+            </dl>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="row">
+        <div class="col-12">
+    <h2>Not Logged in</h2>
+        </div>
+    </div>
+}
