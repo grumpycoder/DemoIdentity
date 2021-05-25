@@ -51,6 +51,7 @@ namespace IdentityServerHost.Quickstart.UI
                         Claims =
                         {
                             new Claim("office_number", "25"),
+                            new Claim(JwtClaimTypes.PhoneNumber, "334.123.4567"),
                             new Claim(JwtClaimTypes.Name, "Bob Smith"),
                             new Claim(JwtClaimTypes.GivenName, "Bob"),
                             new Claim(JwtClaimTypes.FamilyName, "Smith"),

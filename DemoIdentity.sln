@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer", "IdentityS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcApp1", "MvcApp1\MvcApp1.csproj", "{7B37D7E1-F469-4B4A-91C4-E62482AF27F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApiApp1", "WebApiApp1\WebApiApp1.csproj", "{A0666063-82B5-4B1E-AD0F-C2D149898C63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7B37D7E1-F469-4B4A-91C4-E62482AF27F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B37D7E1-F469-4B4A-91C4-E62482AF27F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B37D7E1-F469-4B4A-91C4-E62482AF27F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0666063-82B5-4B1E-AD0F-C2D149898C63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0666063-82B5-4B1E-AD0F-C2D149898C63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0666063-82B5-4B1E-AD0F-C2D149898C63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0666063-82B5-4B1E-AD0F-C2D149898C63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,12 +7,23 @@ namespace IdentityServer
 {
     public static class Config
     {
+        public static IEnumerable<ApiResource> ApiResources =>
+            new ApiResource[]
+            {
+                new ApiResource("webapi1", "Web Api 1")
+            };
+
+
+
         public static IEnumerable<IdentityResource> IdentityResources =>
             new IdentityResource[]
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
-                new IdentityResource(){ Name = "office", DisplayName = "Office Number", UserClaims = {"office_number"}}
+                new IdentityResources.Email(),
+                new IdentityResources.Phone(),
+                new IdentityResource(){ Name = "office", DisplayName = "Office Number", UserClaims = {"office_number"}},
+                new IdentityResource(){Name = "webapi1", DisplayName = "WebApi App 1"}
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -20,6 +31,7 @@ namespace IdentityServer
             {
                 new ApiScope("scope1"),
                 new ApiScope("scope2"),
+                //new ApiScope("webapi1"),
             };
 
         public static IEnumerable<Client> Clients =>
@@ -55,16 +67,17 @@ namespace IdentityServer
                 // interactive client using code flow + pkce
                 new Client
                 {
-                    ClientId = "mvcapp1",
-                    ClientName = "Mvc App One",
-
+                    ClientId = "mvc.client",
+                    ClientName = "Mvc Client",
+                    RequireConsent = true,
                     AllowedGrantTypes = GrantTypes.Implicit,
 
                     RedirectUris = { "https://localhost:5001/signin-oidc" },
-                    //FrontChannelLogoutUri = "https://localhost:5001/signout-oidc",
-                    //PostLogoutRedirectUris = { "https://localhost:5001/signout-callback-oidc" },
+                    FrontChannelLogoutUri = "https://localhost:5001/signout-oidc",
+                    PostLogoutRedirectUris = {"https://localhost:5001/signout-callback-oidc"},
+                    LogoUri = "https://localhost:5001/signout-oidc",
                     
-                    AllowedScopes = { "openid", "profile", "office" }
+                    AllowedScopes = { "openid", "email", "profile", "office", "phone" }
                 },
             };
     }

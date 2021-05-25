@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authentication
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -12,18 +14,22 @@
 {
     var idToken = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.GetTokenAsync(Context, "id_token");
     var accessToken = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.GetTokenAsync(Context, "access_token"); 
+    var rt = await Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.GetTokenAsync(Context, "refresh_token"); 
     <div class="row">
         <div class="col-12">
-            <h2>Logged in @Context.User.Identity.Name</h2>
+            <h2>Claims</h2>
+            <h3>Logged in @Context.User.Identity.Name</h3>
 
             <dl>
                 <dt>Id Token</dt>
                 <dd>@idToken</dd>
                 <dt>Access Token</dt>
                 <dd>@accessToken</dd>
+                <dt>Refresh Token</dt>
+                <dd>@rt</dd>
                 @foreach (var claim in Context.User.Claims)
                 {
-                    <dt>@claim.Type : @claim.Properties</dt>
+                    <dt>@claim.Type</dt>
                     <dd>@claim.Value</dd>
                 }
             </dl>
