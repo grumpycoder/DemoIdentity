@@ -1,5 +1,5 @@
 {
-  "MvcApp1": {
+  "Mvc.Client": {
     "commandName": "Project",
     "launchBrowser": true,
     "applicationUrl": "https://localhost:5001",
@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "MvcApp1": {
+    "Mvc.Client": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

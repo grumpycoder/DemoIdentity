@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using IdentityModel.Client;
 
 namespace MvcApp1.Controllers
 {
@@ -30,14 +31,16 @@ namespace MvcApp1.Controllers
 
         public async Task<IActionResult> CallApi()
         {
-            var apiUrl = "http://localhost:5002/api/values";
+            var apiUrl = "https://localhost:5002/values";
 
-            var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(HttpContext, "access_token");
+            //var accessToken = await AuthenticationHttpContextExtensions.GetTokenAsync(HttpContext, "access_token");
+            var at = await HttpContext.GetTokenAsync("access_token");
             var client = new HttpClient();
 
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            client.SetBearerToken(at);
 
-            HttpResponseMessage response = await client.GetAsync(apiUrl);
+            var response = await client.GetAsync(apiUrl);
             if (response.IsSuccessStatusCode)
             {
                 var json = await response.Content.ReadAsStringAsync();

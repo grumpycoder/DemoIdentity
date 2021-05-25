@@ -32,12 +32,14 @@ namespace MvcApp1
                 {
                     options.Authority = "https://localhost:5000/";
                     options.ClientId = "mvc.client";
+                    options.ClientSecret = "secret";
                     options.Scope.Add("profile");
                     options.Scope.Add("openid");
                     options.Scope.Add("email");
                     options.Scope.Add("office");
                     options.Scope.Add("phone");
-
+                    options.Scope.Add("api1");
+                    options.ResponseType = "code id_token";
                     options.SaveTokens = true;
                 });
         }

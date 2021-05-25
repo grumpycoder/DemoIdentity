@@ -20,26 +20,38 @@ namespace WebApiApp1
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = "https://localhost:5000/";
+                options.Audience = "api1";
+                options.RequireHttpsMetadata = true;
+            });
 
-            ConfigureIdentityServer(services);
+            //services.AddAuthorization();
+            //services.AddAuthentication();
+
+            //ConfigureIdentityServer(services);
         }
 
-        private void ConfigureIdentityServer(IServiceCollection services)
-        {
-            var builder = services.AddAuthentication(options =>
-                 options.DefaultScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme
-                 );
+        //private void ConfigureIdentityServer(IServiceCollection services)
+        //{
+        //    var builder = services.AddAuthentication(options =>
+        //         options.DefaultScheme = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme
+        //         );
 
-            builder.AddJwtBearer(options => SetJwtBearerOptions(options));
+        //    builder.AddJwtBearer(options => SetJwtBearerOptions(options));
 
-        }
+        //}
 
-        private void SetJwtBearerOptions(JwtBearerOptions options)
-        {
-            options.Authority = "https://localhost:5000/";
-            options.Audience = "webapiapp1";
-            options.RequireHttpsMetadata = true;
-        }
+        //private void SetJwtBearerOptions(JwtBearerOptions options)
+        //{
+        //    options.Authority = "https://localhost:5000/";
+        //    options.Audience = "webapiapp1";
+        //    options.RequireHttpsMetadata = true;
+        //}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,8 +65,17 @@ namespace WebApiApp1
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseAuthorization();
+            app.UseAuthentication();
+
+
+            //app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            //{
+            //    Authority = "https://localhost:5000/",
+            //    Audience = "api1",
+            //    RequireHttpsMetadata = true
+            //});
 
             app.UseEndpoints(endpoints =>
             {
